@@ -17,11 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from adocao.views import AdocaoViewSet
+from adocao.views import AdocaoViewSet , home, listar_adocoes_com_usuarios
 
 router = DefaultRouter()
 router.register(r'adocoes', AdocaoViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('', home, name='home'),
+    path('adocoes/', AdocaoViewSet.as_view({'get': 'list', 'post': 'create'}), name='adocoes-list-create'),
+    path('adocoes-com-usuarios/', listar_adocoes_com_usuarios),
 ]

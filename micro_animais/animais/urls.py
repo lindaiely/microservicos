@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import AnimalViewSet , home
+from .views import AnimalViewSet , home, listar_animais_com_adocoes
 
 router = DefaultRouter()
 router.register(r'animais', AnimalViewSet)
@@ -25,4 +25,5 @@ router.register(r'animais', AnimalViewSet)
 urlpatterns = [
     path('', home, name='home'),
     path('animais/', AnimalViewSet.as_view({'get': 'list', 'post': 'create'}), name='animais-list-create'),
+    path('animais-com-adocoes/', listar_animais_com_adocoes),
 ]

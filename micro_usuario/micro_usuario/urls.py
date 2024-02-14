@@ -17,11 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from usuario.views import UsuarioViewSet
+from usuario.views import UsuarioViewSet , home, listar_usuarios_com_animais
+
 
 router = DefaultRouter()
 router.register(r'usuarios', UsuarioViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('', home, name='home'),
+    path('usuarios/', UsuarioViewSet.as_view({'get': 'list', 'post': 'create'}), name='usuarios-list-create'),
+    path('usuarios-com-animais/', listar_usuarios_com_animais),
 ]
